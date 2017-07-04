@@ -1,0 +1,308 @@
+PROGRAM
+IDENTIFIER: taxicab
+';'
+TYPE
+IDENTIFIER: node
+'='
+RECORD
+IDENTIFIER: number
+':'
+INTEGER
+';'
+IDENTIFIER: occurences
+':'
+INTEGER
+';'
+IDENTIFIER: left
+','
+IDENTIFIER: right
+':'
+'^'
+IDENTIFIER: node
+';'
+END
+';'
+IDENTIFIER: nodep
+'='
+'^'
+IDENTIFIER: node
+';'
+VAR
+IDENTIFIER: loopcounter
+':'
+INTEGER
+';'
+IDENTIFIER: dummy
+':'
+REAL
+';'
+FUNCTION
+IDENTIFIER: occurencesof
+'('
+VAR
+IDENTIFIER: root
+':'
+IDENTIFIER: nodep
+';'
+IDENTIFIER: number
+':'
+INTEGER
+')'
+':'
+INTEGER
+';'
+BEGIN
+IDENTIFIER: loopcounter
+':='
+IDENTIFIER: loopcounter
+'+'
+LITERAL: 1
+';'
+IF
+IDENTIFIER: root
+'='
+NIL
+THEN
+BEGIN
+NEW
+'('
+IDENTIFIER: root
+')'
+';'
+IDENTIFIER: root
+'^'
+'.'
+IDENTIFIER: number
+':='
+IDENTIFIER: number
+';'
+IDENTIFIER: root
+'^'
+'.'
+IDENTIFIER: occurences
+':='
+LITERAL: 1
+';'
+IDENTIFIER: occurencesof
+':='
+IDENTIFIER: root
+'^'
+'.'
+IDENTIFIER: occurences
+';'
+END
+ELSE
+IF
+IDENTIFIER: number
+'='
+IDENTIFIER: root
+'^'
+'.'
+IDENTIFIER: number
+THEN
+BEGIN
+IDENTIFIER: root
+'^'
+'.'
+IDENTIFIER: occurences
+':='
+IDENTIFIER: root
+'^'
+'.'
+IDENTIFIER: occurences
+'+'
+LITERAL: 1
+';'
+IDENTIFIER: occurencesof
+':='
+IDENTIFIER: root
+'^'
+'.'
+IDENTIFIER: occurences
+';'
+END
+ELSE
+IF
+IDENTIFIER: number
+'<'
+IDENTIFIER: root
+'^'
+'.'
+IDENTIFIER: number
+THEN
+IDENTIFIER: occurencesof
+':='
+IDENTIFIER: occurencesof
+'('
+IDENTIFIER: root
+'^'
+'.'
+IDENTIFIER: left
+','
+IDENTIFIER: number
+')'
+ELSE
+IDENTIFIER: occurencesof
+':='
+IDENTIFIER: occurencesof
+'('
+IDENTIFIER: root
+'^'
+'.'
+IDENTIFIER: right
+','
+IDENTIFIER: number
+')'
+END
+';'
+FUNCTION
+IDENTIFIER: taxicabnumber
+'('
+IDENTIFIER: index
+':'
+INTEGER
+')'
+':'
+INTEGER
+';'
+VAR
+IDENTIFIER: root
+':'
+'^'
+IDENTIFIER: node
+';'
+IDENTIFIER: sum
+','
+IDENTIFIER: i
+','
+IDENTIFIER: j
+':'
+INTEGER
+';'
+IDENTIFIER: found
+':'
+IDENTIFIER: boolean
+';'
+BEGIN
+IDENTIFIER: root
+':='
+NIL
+';'
+IDENTIFIER: sum
+':='
+LITERAL: 1
+';'
+IDENTIFIER: found
+':='
+IDENTIFIER: false
+';'
+WHILE
+NOT
+IDENTIFIER: found
+IDENTIFIER: do
+BEGIN
+IDENTIFIER: i
+':='
+LITERAL: 1
+';'
+IDENTIFIER: j
+':='
+IDENTIFIER: sum
+'-'
+LITERAL: 1
+';'
+WHILE
+NOT
+IDENTIFIER: found
+AND
+'('
+IDENTIFIER: i
+'<'
+'='
+IDENTIFIER: j
+')'
+IDENTIFIER: do
+BEGIN
+IDENTIFIER: loopcounter
+':='
+IDENTIFIER: loopcounter
+'+'
+LITERAL: 1
+';'
+IDENTIFIER: taxicabnumber
+':='
+IDENTIFIER: i
+'*'
+IDENTIFIER: i
+'*'
+IDENTIFIER: i
+'+'
+IDENTIFIER: j
+'*'
+IDENTIFIER: j
+'*'
+IDENTIFIER: j
+';'
+IDENTIFIER: found
+':='
+IDENTIFIER: occurencesof
+'('
+IDENTIFIER: root
+','
+IDENTIFIER: taxicabnumber
+')'
+'='
+IDENTIFIER: index
+';'
+IDENTIFIER: i
+':='
+IDENTIFIER: i
+'+'
+LITERAL: 1
+';'
+IDENTIFIER: j
+':='
+IDENTIFIER: j
+'-'
+LITERAL: 1
+';'
+END
+';'
+IDENTIFIER: sum
+':='
+IDENTIFIER: sum
+'+'
+LITERAL: 1
+';'
+END
+';'
+END
+';'
+BEGIN
+IDENTIFIER: loopcounter
+':='
+LITERAL: 0
+';'
+IDENTIFIER: dummy
+':='
+LITERAL: 5.5
+';'
+IDENTIFIER: writeln
+'('
+LITERAL: The first Taxi Cab number after 2 is:
+','
+IDENTIFIER: taxicabnumber
+'('
+LITERAL: 2
+')'
+','
+LITERAL: ,Computed in 
+','
+IDENTIFIER: loopcounter
+','
+LITERAL:  iterations
+')'
+';'
+END
+'.'
+EOF
